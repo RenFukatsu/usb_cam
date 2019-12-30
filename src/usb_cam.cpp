@@ -5,9 +5,13 @@ UsbCam::UsbCam() : Node("usb_cam")
     this->image_pub = this->create_publisher<sensor_msgs::msg::Image>("usb_cam/image_raw", 1);
 
     this->show_image = this->declare_parameter("show_image", false);
+    this->width = this->declare_parameter("width", 640);
+    this->height = this->declare_parameter("height", 480);
 
     std::cout << "------ usb_cam ------" << std::endl;
     std::cout << "show image : " << (this->show_image ? "true" : "false")  << std::endl;
+    std::cout << "width : " << this->width << std::endl;
+    std::cout << "height : " << this->height << std::endl;
 
     this->camera.open(cv::CAP_ANY);
     if(!camera.isOpened())
@@ -16,8 +20,24 @@ UsbCam::UsbCam() : Node("usb_cam")
         rclcpp::shutdown();
         return;
     }
+    this->set_camera_parameter();
+
     this->process();
 }
+
+void UsbCam::set_camera_parameter()
+{
+    try
+    {
+        this->camera.set(CV_CAP_PROP_FRAME_WIDTH, this->width);
+        this->camera.set(CV_CAP_PROP_FRAME_HEIGHT, this->height);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+    
 
 void UsbCam::process()
 {

@@ -13,9 +13,12 @@ public:
     UsbCam();
 
 private:
+    void set_camera_parameter();
     void process();
 
     bool show_image;
+    int width;
+    int height;
 
     cv::VideoCapture camera;
     int count = 0;

@@ -1,0 +1,4 @@
+usb_cam:
+    ros__parameters:
+        width: 1280
+        height: 720
