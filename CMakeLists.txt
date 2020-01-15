@@ -22,6 +22,7 @@ find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(yaml-cpp REQUIRED)
 find_package(cv_bridge REQUIRED)
+find_package(image_transport REQUIRED)
 
 include_directories(include)
 
@@ -31,15 +32,10 @@ ament_target_dependencies(usb_cam
     std_msgs
     sensor_msgs
     cv_bridge
-)
-
-add_executable(camera_info_publisher src/camera_info_publisher_node.cpp src/camera_info_publisher.cpp)
-ament_target_dependencies(camera_info_publisher
-    rclcpp
-    sensor_msgs
     yaml-cpp
+    image_transport
 )
-target_link_libraries(camera_info_publisher
+target_link_libraries(usb_cam
     yaml-cpp
 )
 
@@ -53,7 +49,6 @@ ament_target_dependencies(image_listener
 
 install(TARGETS
     usb_cam
-    camera_info_publisher
     image_listener
     DESTINATION lib/${PROJECT_NAME}
 )
