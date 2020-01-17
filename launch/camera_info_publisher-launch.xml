@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="usb_cam" exec="camera_info_publisher" output="screen">
+        <param name="yaml_path" value="$(find-pkg-share usb_cam)/parameters/infant_C920_720p.yaml" />
+    </node>
+</launch>
+

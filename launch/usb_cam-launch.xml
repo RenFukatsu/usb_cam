@@ -2,7 +2,7 @@
     <node pkg="usb_cam" exec="usb_cam" output="screen">
         <param name="show_image" value="false" />
         <param from="$(find-pkg-share usb_cam)/parameters/camera_parameter.yaml" />
-        <param name="yaml_path" value="$(find-pkg-share usb_cam)/parameters/C920_720p.yaml" />
+        <param name="yaml_path" value="$(find-pkg-share usb_cam)/parameters/infant_C920_720p.yaml" />
     </node>
 
     <node pkg="usb_cam" exec="image_listener" output="screen" />

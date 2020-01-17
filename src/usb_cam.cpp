@@ -47,6 +47,7 @@ sensor_msgs::msg::CameraInfo UsbCam::yaml_to_CameraInfo(std::string path)
         YAML::Node param = YAML::LoadFile(path);
         msg.width = param["image_width"].as<uint32_t>();
         msg.height = param["image_height"].as<uint32_t>();
+        msg.header.frame_id = param["camera_name"].as<std::string>();
         std::vector<double> k = param["camera_matrix"]["data"].as<std::vector<double>>();
         std::copy_n(k.begin(), 9UL, msg.k.begin());
         msg.d = param["distortion_coefficients"]["data"].as<std::vector<double>>();
@@ -54,7 +55,7 @@ sensor_msgs::msg::CameraInfo UsbCam::yaml_to_CameraInfo(std::string path)
         std::copy_n(r.begin(), 9UL, msg.r.begin());
         std::vector<double> p = param["projection_matrix"]["data"].as<std::vector<double>>();
         std::copy_n(p.begin(), 12UL, msg.p.begin());
-        msg.distortion_model = param["camera_matrix"]["distortion_model"].as<std::string>();
+        msg.distortion_model = param["distortion_model"].as<std::string>();
     }
     catch(const std::exception& e)
     {

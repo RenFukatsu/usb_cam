@@ -39,6 +39,16 @@ target_link_libraries(usb_cam
     yaml-cpp
 )
 
+add_executable(camera_info_publisher src/camera_info_publisher_node.cpp src/camera_info_publisher.cpp)
+ament_target_dependencies(camera_info_publisher
+    rclcpp
+    sensor_msgs
+    yaml-cpp
+)
+target_link_libraries(camera_info_publisher
+    yaml-cpp
+)
+
 add_executable(image_listener src/image_listener_node.cpp src/image_listener.cpp)
 ament_target_dependencies(image_listener
     rclcpp
@@ -49,6 +59,7 @@ ament_target_dependencies(image_listener
 
 install(TARGETS
     usb_cam
+    camera_info_publisher
     image_listener
     DESTINATION lib/${PROJECT_NAME}
 )
