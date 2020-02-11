@@ -12,3 +12,12 @@ void ImageListener::image_callback(const sensor_msgs::msg::Image::SharedPtr msg)
     cv::waitKey(5);
     return;
 }
+
+int main(int argc, char * argv[])
+{
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<ImageListener>());
+    rclcpp::shutdown();
+    return 0;
+}
+

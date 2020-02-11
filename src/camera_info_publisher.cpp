@@ -79,3 +79,12 @@ sensor_msgs::msg::CameraInfo CameraInfoPublisher::yaml_to_CameraInfo(std::string
 
     return msg;
 }
+
+int main(int argc, char * argv[])
+{
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<CameraInfoPublisher>());
+    rclcpp::shutdown();
+    return 0;
+}
+

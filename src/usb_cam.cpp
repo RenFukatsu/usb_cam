@@ -96,7 +96,7 @@ void UsbCam::set_camera_parameter()
         std::cerr << e.what() << '\n';
     }
 }
-    
+
 
 void UsbCam::process()
 {
@@ -124,3 +124,13 @@ void UsbCam::process()
         image_pub.publish(this->bridge->toImageMsg(), sensor_msgs::msg::CameraInfo::ConstPtr(new sensor_msgs::msg::CameraInfo(this->camera_info_msg)));
     }
 }
+
+int main(int argc, char * argv[])
+{
+    rclcpp::init(argc, argv);
+    std::shared_ptr<UsbCam> usb_cam = std::make_shared<UsbCam>();
+    usb_cam->process();
+    rclcpp::shutdown();
+    return 0;
+}
+

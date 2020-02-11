@@ -26,7 +26,7 @@ find_package(image_transport REQUIRED)
 
 include_directories(include)
 
-add_executable(usb_cam src/usb_cam_node.cpp src/usb_cam.cpp)
+add_executable(usb_cam src/usb_cam.cpp)
 ament_target_dependencies(usb_cam
     rclcpp
     std_msgs
@@ -39,7 +39,7 @@ target_link_libraries(usb_cam
     yaml-cpp
 )
 
-add_executable(camera_info_publisher src/camera_info_publisher_node.cpp src/camera_info_publisher.cpp)
+add_executable(camera_info_publisher src/camera_info_publisher.cpp)
 ament_target_dependencies(camera_info_publisher
     rclcpp
     sensor_msgs
@@ -49,7 +49,7 @@ target_link_libraries(camera_info_publisher
     yaml-cpp
 )
 
-add_executable(image_listener src/image_listener_node.cpp src/image_listener.cpp)
+add_executable(image_listener src/image_listener.cpp)
 ament_target_dependencies(image_listener
     rclcpp
     std_msgs
